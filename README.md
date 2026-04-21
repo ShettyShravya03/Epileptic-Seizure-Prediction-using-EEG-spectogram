@@ -1,11 +1,16 @@
-# Epileptic Seizure Prediction using EEG Spectrograms
+<!-- BANNER — upload banner.svg to this repo root -->
+<p align="center">
+  <img src="./banner.svg" width="100%" alt="Epileptic Seizure Prediction using EEG Spectrograms">
+</p>
 
-> **IEEE COSMIC 2025** — Peer-reviewed and published
-
-[![IEEE Paper](https://img.shields.io/badge/IEEE-COSMIC_2025-00629B?style=flat-square&logo=ieee&logoColor=white)](https://doi.org/10.1109/COSMIC67569.2025.11380836)
-[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)](https://pytorch.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+<p align="center">
+  <a href="https://ieeexplore.ieee.org/document/11380836"><img src="https://img.shields.io/badge/IEEE-COSMIC_2025-00629B?style=for-the-badge&logo=ieee&logoColor=white"></a>&nbsp;
+  <img src="https://img.shields.io/badge/Accuracy-85%25-7c3aed?style=for-the-badge">&nbsp;
+  <img src="https://img.shields.io/badge/ROC--AUC-0.90-a855f7?style=for-the-badge">&nbsp;
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white"></a>&nbsp;
+  <a href="https://pytorch.org"><img src="https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"></a>&nbsp;
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge">
+</p>
 
 ---
 
@@ -19,7 +24,6 @@
 - [Dataset](#-dataset)
 - [Interpretability](#-interpretability)
 - [Publication](#-publication)
-- [License](#-license)
 
 ---
 
@@ -33,16 +37,37 @@ A deep learning pipeline for **early epileptic seizure prediction** from multi-c
 
 ## 📊 Key Results
 
-| Model | Accuracy | ROC-AUC |
-|-------|----------|---------|
-| **Wavelet-CNN-BiLSTM + Attention (ours)** | **85%** | **0.90** |
-| CNN only (baseline) | 78% | 0.82 |
-| LSTM only (baseline) | 80% | 0.84 |
+<table>
+  <tr>
+    <th>Model</th>
+    <th>Accuracy</th>
+    <th>ROC-AUC</th>
+    <th>Improvement</th>
+  </tr>
+  <tr>
+    <td><strong>Wavelet-CNN-BiLSTM + Attention (ours)</strong></td>
+    <td><strong>85%</strong></td>
+    <td><strong>0.90</strong></td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td>CNN only (baseline)</td>
+    <td>78%</td>
+    <td>0.82</td>
+    <td>+7% acc</td>
+  </tr>
+  <tr>
+    <td>LSTM only (baseline)</td>
+    <td>80%</td>
+    <td>0.84</td>
+    <td>+5% acc</td>
+  </tr>
+</table>
 
-- Dataset: **CHB-MIT Scalp EEG** (24 patients, 198 seizures, 664 hours)
-- Validation: **10-fold subject-wise GroupKFold** (no data leakage across patients)
-- Threshold optimisation: Youden's J statistic
-- Severity classification: Mild · Moderate · Severe
+- **Dataset:** CHB-MIT Scalp EEG (24 patients, 198 seizures, 664 hours)
+- **Validation:** 10-fold subject-wise GroupKFold — no data leakage across patients
+- **Threshold optimisation:** Youden's J statistic
+- **Severity classification:** Mild · Moderate · Severe
 
 ---
 
@@ -52,30 +77,40 @@ A deep learning pipeline for **early epileptic seizure prediction** from multi-c
 Raw EEG (22 channels, 256 Hz)
           │
           ▼
-Morlet Wavelet CWT
-(time-frequency spectrograms per channel)
-Superior resolution over STFT for
-non-stationary preictal patterns
+  ┌───────────────────┐
+  │  Morlet Wavelet   │  CWT spectrograms — superior time-frequency
+  │  CWT Transform    │  resolution for non-stationary preictal patterns
+  └───────────────────┘
           │
           ▼
-3-Layer CNN
-(spatial feature extraction from spectrograms)
+  ┌───────────────────┐
+  │   3-Layer CNN     │  Spatial feature extraction from spectrograms
+  │  (Conv + BN + ReLU│  per EEG channel
+  └───────────────────┘
           │
           ▼
-2-Layer BiLSTM
-(temporal sequence modelling across EEG channels)
+  ┌───────────────────┐
+  │  2-Layer BiLSTM   │  Temporal modelling — forward + backward
+  │                   │  across EEG channel sequences
+  └───────────────────┘
           │
           ▼
-Attention Mechanism
-(focuses on seizure-relevant frequency bands)
+  ┌───────────────────┐
+  │ Attention Module  │  Learns to focus on seizure-relevant
+  │                   │  frequency bands and time windows
+  └───────────────────┘
           │
           ▼
-Binary Classification
-(Interictal vs Preictal)
+  ┌───────────────────┐
+  │ Binary Classifier │  Interictal vs Preictal
+  │  + Severity       │  Mild / Moderate / Severe
+  └───────────────────┘
           │
           ▼
-Grad-CAM + SHAP
-(per-channel activation maps for clinical interpretability)
+  ┌───────────────────┐
+  │ Grad-CAM + SHAP   │  Per-channel activation maps
+  │ Interpretability  │  for clinical transparency
+  └───────────────────┘
 ```
 
 ---
@@ -83,8 +118,8 @@ Grad-CAM + SHAP
 ## ✨ Features
 
 - **Morlet wavelet CWT spectrograms** — superior time-frequency resolution over STFT for preictal EEG
-- **Multi-channel EEG processing** — 22 standard bipolar EEG channels
-- **CNN-BiLSTM + Attention** — captures spatial spectrogram patterns and temporal channel dependencies
+- **22-channel multi-channel EEG processing** — standard bipolar montage
+- **CNN-BiLSTM + Attention** — captures spatial spectrogram patterns + temporal dependencies
 - **Subject-wise GroupKFold** — prevents patient data leakage across train/test splits
 - **Automatic threshold optimisation** — Youden's J statistic for optimal classification cutoff
 - **Severity classification** — Mild, Moderate, and Severe seizure risk categories
@@ -95,13 +130,7 @@ Grad-CAM + SHAP
 
 ## 🔧 Installation
 
-### Requirements
-
-- Python 3.8+
-- PyTorch 2.0+
-- CUDA-compatible GPU (recommended)
-
-### Setup
+**Requirements:** Python 3.8+ · PyTorch 2.0+ · CUDA-compatible GPU (recommended)
 
 ```bash
 # Clone the repository
@@ -112,7 +141,7 @@ cd Epileptic-Seizure-Prediction-using-EEG-spectrogram
 pip install -r requirements.txt
 ```
 
-**requirements.txt includes:** `torch` `torchvision` `scikit-learn` `pandas` `numpy` `matplotlib` `seaborn` `Pillow` `mne` `scipy`
+`requirements.txt` includes: `torch` `torchvision` `scikit-learn` `pandas` `numpy` `matplotlib` `seaborn` `Pillow` `mne` `scipy`
 
 ```bash
 # Optional: GPU acceleration (CUDA 11.8)
@@ -168,15 +197,15 @@ print(result["confidence"])  # e.g. 0.91
 | Sampling rate | 256 Hz |
 | Channels | 22 (bipolar pairs) |
 
-> The dataset is publicly available on PhysioNet. Download and place it in `./chbmit` before running preprocessing.
+> Download the dataset from PhysioNet and place it in `./chbmit` before running preprocessing.
 
 ---
 
 ## 🔍 Interpretability
 
-Grad-CAM activation maps are generated per EEG channel to highlight the spectrogram time-frequency regions most influential to the seizure prediction. This transparency is essential for clinical deployment — a clinician can verify which frequency bands and time windows the model flagged as preictal.
+Grad-CAM activation maps are generated per EEG channel to highlight the spectrogram time-frequency regions most influential to the prediction. This is essential for clinical deployment — a clinician can verify exactly which frequency bands and time windows the model flagged as preictal.
 
-Example output per channel:
+**Output per channel:**
 - Heatmap overlay on the CWT spectrogram
 - Highlighted frequency bands (delta, theta, alpha, beta, gamma)
 - Per-channel contribution scores via SHAP
@@ -185,14 +214,20 @@ Example output per channel:
 
 ## 📄 Publication
 
-This work was peer-reviewed and published at **IEEE COSMIC 2025**.
+This work was peer-reviewed and published at the **2025 Second International Conference on Computing, Communication, and Smart Systems (IEEE COSMIC 2025)**.
+
+**Authors:** Abhishek S. Rao · Ramaprasad Poojary · Shravya A. Prabhu · **Shravya S. Shetty** · Diya M. Shetty · H. Nagesh Shenoy
+
+**DOI:** [10.1109/COSMIC67569.2025.11380836](https://ieeexplore.ieee.org/document/11380836)
 
 ```bibtex
-@inproceedings{shetty2025seizure,
+@inproceedings{rao2025seizure,
   title     = {Wavelet-Based Deep Neural Network with Attention for Interpretable
                Epileptic Seizure Prediction Using EEG Spectrograms},
-  author    = {Shetty, Shravya S and {others}},
-  booktitle = {Proceedings of IEEE COSMIC 2025},
+  author    = {Rao, Abhishek S. and Poojary, Ramaprasad and Prabhu, Shravya A.
+               and Shetty, Shravya S. and Shetty, Diya M. and Shenoy, H. Nagesh},
+  booktitle = {2025 Second International Conference on Computing, Communication,
+               and Smart Systems (COSMIC)},
   year      = {2025},
   doi       = {10.1109/COSMIC67569.2025.11380836}
 }
@@ -200,6 +235,12 @@ This work was peer-reviewed and published at **IEEE COSMIC 2025**.
 
 ---
 
-## 📜 License
+## 🏷️ Topics
 
-MIT © 2025 Shravya S Shetty
+`eeg` `seizure-prediction` `deep-learning` `bilstm` `wavelet-transform` `cnn` `attention-mechanism` `grad-cam` `medical-ai` `chb-mit` `signal-processing` `ieee` `pytorch` `explainable-ai`
+
+---
+
+<p align="center">
+  <sub>Built by <a href="https://github.com/ShettyShravya03">Shravya S Shetty</a> et al. · NMAM Institute of Technology · IEEE COSMIC 2025</sub>
+</p>
