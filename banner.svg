@@ -1,0 +1,82 @@
+<svg width="900" height="180" viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0118"/>
+      <stop offset="40%" stop-color="#130a2e"/>
+      <stop offset="70%" stop-color="#1a0a3a"/>
+      <stop offset="100%" stop-color="#0a0118"/>
+    </linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#7c3aed" stroke-width="0.3" opacity="0.18"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <style>
+    .eeg1{stroke-dasharray:1800;stroke-dashoffset:1800;animation:draw 2.8s ease forwards,loop 8s 2.8s linear infinite;}
+    .eeg2{stroke-dasharray:1800;stroke-dashoffset:1800;animation:draw 2.8s ease 0.3s forwards,loop 8s 3.1s linear infinite;}
+    @keyframes draw{to{stroke-dashoffset:0;}}
+    @keyframes loop{from{stroke-dashoffset:0;}to{stroke-dashoffset:-1800;}}
+    .t1{animation:fu 0.9s ease 0.1s forwards;opacity:0;}
+    .t2{animation:fu 0.9s ease 0.35s forwards;opacity:0;}
+    .t3{animation:fu 0.9s ease 0.6s forwards;opacity:0;}
+    .t4{animation:fu 0.9s ease 0.85s forwards;opacity:0;}
+    @keyframes fu{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  </style>
+
+  <rect width="900" height="180" fill="url(#bg)"/>
+  <rect width="900" height="180" fill="url(#grid)"/>
+
+  <!-- Glow orbs -->
+  <circle cx="160" cy="90" r="70" fill="#7c3aed" opacity="0.07" filter="url(#glow2)"/>
+  <circle cx="740" cy="90" r="70" fill="#a855f7" opacity="0.07" filter="url(#glow2)"/>
+
+  <!-- Primary EEG wave — purple -->
+  <polyline class="eeg1"
+    points="0,90 40,90 58,90 70,60 82,120 94,42 106,138 118,90 188,90 210,74 232,106 254,90 320,90 338,52 350,128 362,46 374,134 386,90 456,90 480,68 504,112 528,90 592,90 612,56 624,124 636,50 648,130 660,90 730,90 754,72 770,108 786,90 850,90 874,80 890,100 900,90"
+    fill="none" stroke="#a855f7" stroke-width="2.2" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Secondary trace — lighter -->
+  <polyline class="eeg2"
+    points="0,96 60,96 78,84 98,108 120,68 140,116 160,96 260,96 285,82 308,110 332,96 410,96 428,66 440,126 452,60 464,132 476,96 558,96 578,78 598,114 618,96 700,96 720,84 738,108 756,96 836,96 858,88 872,104 900,96"
+    fill="none" stroke="#c084fc" stroke-width="1" opacity="0.22"/>
+
+  <!-- Scan line effect -->
+  <rect x="0" y="0" width="4" height="180" fill="#a855f7" opacity="0.3">
+    <animateTransform attributeName="transform" type="translate" from="-4 0" to="904 0" dur="3s" begin="0.5s" fill="freeze"/>
+  </rect>
+
+  <!-- Title -->
+  <text class="t1" x="450" y="68"
+    font-family="'Arial Black', Impact, sans-serif"
+    font-size="30" font-weight="900" fill="white"
+    text-anchor="middle" letter-spacing="3">EPILEPTIC SEIZURE PREDICTION</text>
+
+  <!-- Subtitle -->
+  <text class="t2" x="450" y="95"
+    font-family="Arial, sans-serif" font-size="13" fill="#c084fc"
+    text-anchor="middle" letter-spacing="2">Wavelet · CNN-BiLSTM · Attention · Grad-CAM</text>
+
+  <!-- Divider -->
+  <line x1="200" y1="112" x2="700" y2="112" stroke="#7c3aed" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Stats row -->
+  <text class="t3" x="225" y="132" font-family="monospace" font-size="11" fill="#a855f7" text-anchor="middle" font-weight="700">85% Accuracy</text>
+  <text class="t3" x="225" y="147" font-family="monospace" font-size="9" fill="#6d28d9" text-anchor="middle">CHB-MIT Dataset</text>
+
+  <line x1="337" y1="120" x2="337" y2="152" stroke="#4c1d95" stroke-width="0.5"/>
+
+  <text class="t3" x="450" y="132" font-family="monospace" font-size="11" fill="#a855f7" text-anchor="middle" font-weight="700">ROC-AUC 0.90</text>
+  <text class="t3" x="450" y="147" font-family="monospace" font-size="9" fill="#6d28d9" text-anchor="middle">10-fold GroupKFold</text>
+
+  <line x1="563" y1="120" x2="563" y2="152" stroke="#4c1d95" stroke-width="0.5"/>
+
+  <text class="t4" x="675" y="132" font-family="monospace" font-size="11" fill="#a855f7" text-anchor="middle" font-weight="700">IEEE COSMIC 2025</text>
+  <text class="t4" x="675" y="147" font-family="monospace" font-size="9" fill="#6d28d9" text-anchor="middle">Peer-reviewed</text>
+</svg>
