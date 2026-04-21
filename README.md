@@ -235,12 +235,6 @@ This work was peer-reviewed and published at the **2025 Second International Con
 
 ---
 
-## 🏷️ Topics
-
-`eeg` `seizure-prediction` `deep-learning` `bilstm` `wavelet-transform` `cnn` `attention-mechanism` `grad-cam` `medical-ai` `chb-mit` `signal-processing` `ieee` `pytorch` `explainable-ai`
-
----
-
 <p align="center">
   <sub>Built by <a href="https://github.com/ShettyShravya03">Shravya S Shetty</a> et al. · NMAM Institute of Technology · IEEE COSMIC 2025</sub>
 </p>
